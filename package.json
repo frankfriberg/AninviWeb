@@ -1,0 +1,12 @@
+{
+  "name": "aninvi",
+  "scripts": {
+    "start": "nuxt",
+    "build": "nuxt build",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.13.6",
+    "nuxt": "^2.15.8"
+  }
+}

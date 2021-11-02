@@ -1,0 +1,14 @@
+[
+  {
+    "name": "i-client",
+    "path": "/i/:client",
+    "component": "/Users/frank/Sync/Development/Aninvi/v3/www/pages/i/_client/index.vue",
+    "chunkName": "pages/i/_client/index"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/Users/frank/Sync/Development/Aninvi/v3/www/pages/index.vue",
+    "chunkName": "pages/index"
+  }
+]

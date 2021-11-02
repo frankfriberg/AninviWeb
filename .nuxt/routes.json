@@ -3,12 +3,14 @@
     "name": "i-client",
     "path": "/i/:client",
     "component": "/Users/frank/Sync/Development/Aninvi/v3/www/pages/i/_client/index.vue",
-    "chunkName": "pages/i/_client/index"
+    "chunkName": "pages/i/_client/index",
+    "_name": "_624c7d89"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Users/frank/Sync/Development/Aninvi/v3/www/pages/index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_c2e8d5d8"
   }
 ]

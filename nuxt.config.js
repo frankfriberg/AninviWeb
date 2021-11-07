@@ -1,14 +1,5 @@
 export default {
-  /*
-   ** Nuxt target
-   ** See https://nuxtjs.org/api/configuration-target
-   */
   target: 'server',
-
-  /*
-   ** Headers of the page
-   ** See https://nuxtjs.org/api/configuration-head
-   */
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -22,53 +13,28 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
-
-  /*
-   ** Global CSS
-   */
-  css: [],
-
-  /*
-   ** Plugins to load before mounting the App
-   ** https://nuxtjs.org/guide/plugins
-   */
   plugins: [],
-
-  /*
-   ** Auto import components
-   ** See https://nuxtjs.org/api/configuration-components
-   */
   components: true,
-
-  /*
-   ** Nuxt.js dev-modules
-   */
-  buildModules: [],
-
-  /*
-   ** Nuxt.js modules
-   */
-  modules: ['@nuxtjs/axios'],
-
-  /*
-   ** Server Middleware
-   */
+  buildModules: ['@nuxtjs/tailwindcss'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/i18n'],
   serverMiddleware: {},
-
-  /*
-   ** For deployment you might want to edit host and port
-   */
-  // server: {
-  //  port: 8000, // default: 3000
-  //  host: '0.0.0.0' // default: localhost
-  // },
-
-  /*
-   ** Build configuration
-   ** See https://nuxtjs.org/api/configuration-build/
-   */
   build: {},
-
+  i18n: {
+    locales: [
+      {
+        code: 'no',
+        file: 'no.js',
+      },
+      {
+        code: 'en',
+        file: 'en.js',
+      },
+    ],
+    lazy: true,
+    langDir: 'lang/',
+    strategy: 'no_prefix',
+    defaultLocale: 'no',
+  },
   axios: {
     baseURL: process.env.API_URL,
   },

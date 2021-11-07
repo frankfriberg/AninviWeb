@@ -1,1 +1,20 @@
-{}
+{
+  "ResponseForm": {
+    "description": "Auto imported from components/ResponseForm.vue"
+  },
+  "FormBoolean": {
+    "description": "Auto imported from components/form/Boolean.vue"
+  },
+  "FormCheckbox": {
+    "description": "Auto imported from components/form/Checkbox.vue"
+  },
+  "FormOption": {
+    "description": "Auto imported from components/form/Option.vue"
+  },
+  "FormRadio": {
+    "description": "Auto imported from components/form/Radio.vue"
+  },
+  "FormString": {
+    "description": "Auto imported from components/form/String.vue"
+  }
+}

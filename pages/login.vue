@@ -23,8 +23,9 @@
   </form>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
   data() {
     return {
       form: {
@@ -49,7 +50,7 @@ export default {
         })
     },
   },
-}
+})
 </script>
 
 <style></style>

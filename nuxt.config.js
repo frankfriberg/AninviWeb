@@ -15,7 +15,7 @@ export default {
   },
   plugins: [],
   components: true,
-  buildModules: ['@nuxtjs/tailwindcss'],
+  buildModules: ['@nuxtjs/tailwindcss', '@nuxt/typescript-build'],
   modules: ['@nuxtjs/axios', '@nuxtjs/i18n', '@nuxtjs/auth-next'],
   serverMiddleware: {},
   build: {},

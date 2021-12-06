@@ -7,6 +7,13 @@
     "_name": "_6833382b"
   },
   {
+    "name": "user",
+    "path": "/user",
+    "component": "/Users/frank/Sync/Development/Aninvi/v3/www/pages/user/index.vue",
+    "chunkName": "pages/user/index",
+    "_name": "_7bff0e88"
+  },
+  {
     "name": "i-event",
     "path": "/i/:event",
     "component": "/Users/frank/Sync/Development/Aninvi/v3/www/pages/i/_event/index.vue",

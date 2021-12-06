@@ -1,4 +1,6 @@
-const verifyEvent = async (context) => {
+import { Middleware } from '@nuxt/types'
+
+const verifyEvent: Middleware = async (context) => {
   const { error, store } = context
 
   if (!store.state.event) {

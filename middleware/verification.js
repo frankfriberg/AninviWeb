@@ -1,11 +1,14 @@
-export default async function(context) {
+const verifyEvent = async (context) => {
   const { error, store } = context
 
-  if (!store.state.client) {
+  if (!store.state.event) {
     try {
-      await store.dispatch('getClientBySlug', context.params.client)
+      await store.dispatch('getEventBySlug', context.params.event)
     } catch (err) {
-      error({ statusCode: err.response.status, message: err.response.data })
+      if (err instanceof Error) return error(err)
+      console.log(err)
     }
   }
 }
+
+export default verifyEvent

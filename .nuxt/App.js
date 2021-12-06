@@ -8,10 +8,11 @@ import NuxtBuildIndicator from './components/nuxt-build-indicator'
 
 import '../node_modules/@nuxtjs/tailwindcss/dist/runtime/tailwind.css'
 
+import _6da22f41 from '../layouts/client.vue'
 import _78016a7f from '../layouts/invite.vue'
 import _6f6c098b from './layouts/default.vue'
 
-const layouts = { "_invite": sanitizeComponent(_78016a7f),"_default": sanitizeComponent(_6f6c098b) }
+const layouts = { "_client": sanitizeComponent(_6da22f41),"_invite": sanitizeComponent(_78016a7f),"_default": sanitizeComponent(_6f6c098b) }
 
 export default {
   render (h, props) {

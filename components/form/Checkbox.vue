@@ -9,8 +9,10 @@
           :id="id + option"
           :value="option"
           v-model="checked"
-        >
-        <label class="inline mr-3 ml-1" :for="id + option">{{ translated[index] }}</label>
+        />
+        <label class="inline ml-1 mr-3" :for="id + option">{{
+          translated[index]
+        }}</label>
       </template>
     </div>
   </fieldset>
@@ -22,17 +24,17 @@ export default {
     id: String,
     label: String,
     options: Array,
-    translated: Array
+    translated: Array,
   },
   data() {
     return {
-      checked: []
+      checked: [],
     }
   },
   watch: {
     checked: function(val) {
       this.$emit('input', val)
-    } 
-  }
+    },
+  },
 }
 </script>

@@ -1,14 +1,14 @@
 <template>
   <div>
     <h1>Invite Layout</h1>
-    {{ client }}
+    {{ event }}
     <Nuxt />
   </div>
 </template>
 
 <script>
 export default {
-  props: ['client'],
+  props: ['event'],
   middleware: ['verification'],
 }
 </script>

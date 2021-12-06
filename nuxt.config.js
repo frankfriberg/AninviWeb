@@ -16,7 +16,7 @@ export default {
   plugins: [],
   components: true,
   buildModules: ['@nuxtjs/tailwindcss'],
-  modules: ['@nuxtjs/axios', '@nuxtjs/i18n'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/i18n', '@nuxtjs/auth-next'],
   serverMiddleware: {},
   build: {},
   i18n: {
@@ -34,6 +34,28 @@ export default {
     langDir: 'lang/',
     strategy: 'no_prefix',
     defaultLocale: 'no',
+  },
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          property: 'token',
+          maxAge: 3600,
+        },
+        user: {
+          property: false,
+          autoFetch: false,
+        },
+        endpoints: {
+          login: {
+            url: 'auth/login',
+            method: 'post',
+            propertyName: 'data.token',
+          },
+          logout: false,
+        },
+      },
+    },
   },
   axios: {
     baseURL: process.env.API_URL,

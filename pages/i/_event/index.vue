@@ -7,7 +7,7 @@ export default {
   layout: 'invite',
   data() {
     return {
-      client: this.$store.getters['w'],
+      event: this.$store.getters['w'],
     }
   },
 }

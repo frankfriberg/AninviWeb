@@ -12,7 +12,7 @@
       />
       <span
         v-if="input.persons.length > 1"
-        class="mt-2 h-full cursor-pointer bg-red-500 inline appearance-none  rounded border border-black py-2 px-1 leading-tight focus:outline-none focus:shaodw-outline hover:bg-red-400 bold"
+        class="inline h-full px-1 py-2 mt-2 leading-tight bg-red-500 border border-black rounded appearance-none cursor-pointer focus:outline-none focus:shaodw-outline hover:bg-red-400 bold"
         :key="index + 'button'"
         @click="removePerson(index)"
         ><svg
@@ -31,7 +31,7 @@
     </div>
 
     <span
-      class="button cursor-pointer mt-5 mb-3"
+      class="mt-5 mb-3 cursor-pointer button"
       @click="addPerson"
       v-t="'form.add'"
     ></span>
@@ -75,12 +75,12 @@
       />
     </div>
 
-    <p v-if="error" class="p-3 bg-orange-200 font-bold rounded-md">
+    <p v-if="error" class="p-3 font-bold bg-orange-200 rounded-md">
       {{ $t('form.error') }}
     </p>
 
     <input
-      class="button uppercase mt-6 mb-12"
+      class="mt-6 mb-12 uppercase button"
       role="button"
       type="submit"
       :value="$t('send')"
@@ -120,7 +120,7 @@ export default {
       this.input.names = names
     }
 
-    this.input.clientId = this.$store.getters['client']._id
+    this.input.eventId = this.$store.getters['event']._id
   },
   methods: {
     addPerson() {
@@ -140,7 +140,7 @@ export default {
         })
         .then((response) => {
           if (response.status === 201) {
-            this.$router.push(this.localePath('client-thanks'))
+            this.$router.push(this.localePath('event-thanks'))
           } else {
             this.error = true
           }

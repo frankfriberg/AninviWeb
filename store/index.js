@@ -1,23 +1,26 @@
 export const state = () => {
-  client: []
+  event: []
 }
 
 export const mutations = {
-  SET_CLIENT(state, client) {
-    state.client = client
+  SET_EVENT(state, event) {
+    state.event = event
   },
 }
 
 export const actions = {
-  getClientBySlug({ commit, error }, slug) {
+  getEventBySlug({ commit, error }, slug) {
     return this.$axios
-      .get(`client/${slug}`)
-      .then((client) => commit('SET_CLIENT', client.data.data))
+      .get(`event/${slug}`)
+      .then((event) => {
+        console.log(event.data)
+        return commit('SET_EVENT', event.data)
+      })
+      .catch((err) => error(err))
   },
 }
 
 export const getters = {
-  client: (state) => state.client,
-  guests: (state) => state.client.guests,
-  questions: (state) => state.client.questions,
+  event: (state) => state.event,
+  questions: (state) => state.event.questions,
 }

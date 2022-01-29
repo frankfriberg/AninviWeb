@@ -6,9 +6,9 @@
       :name="id"
       :id="id + $t('true')"
       :value="true"
-      v-model.lazy="interface"
-    >
-    <label class="inline mr-3 ml-1" :for="id + $t('true')">
+      v-model="input"
+    />
+    <label class="inline ml-1 mr-3" :for="id + $t('true')">
       {{ $t('true') }}
     </label>
 
@@ -17,30 +17,24 @@
       :name="id"
       :id="id + $t('false')"
       :value="false"
-      v-model.lazy="interface"
-    >
-    <label class="inline mr-3 ml-1" :for="id + $t('false')">
+      v-model="input"
+    />
+    <label class="inline ml-1 mr-3" :for="id + $t('false')">
       {{ $t('false') }}
     </label>
   </fieldset>
 </template>
 
-<script>
-export default {
-  props: {
-    id: String,
-    label: String,
-    required: Boolean
-  },
-  computed: {
-    interface: {
-      get() {
-        return this.value
-      },
-      set(val) {
-        this.$emit('input', val)
-      }
-    }
-  }
+<script lang="ts">
+import { Component, Prop, Vue, ModelSync, VModel } from 'vue-property-decorator'
+
+@Component
+export default class FormBoolean extends Vue {
+  @VModel({ type: Boolean }) input!: boolean
+
+  @Prop() readonly id!: string
+  @Prop() readonly label!: string
+  @Prop() readonly options!: string[]
+  @Prop({ default: false }) readonly required!: boolean
 }
 </script>

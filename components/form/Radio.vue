@@ -1,5 +1,5 @@
 <template lang="html">
-  <fieldset class="radio my-3" :id="id">
+  <fieldset class="my-3 radio" :id="id">
     <legend class="mb-2" :for="id">{{ label }}</legend>
     <template v-for="option in options">
       <input
@@ -7,40 +7,23 @@
         :name="id"
         :id="id + option"
         :value="option"
-        v-model="interface"
+        v-model="input"
       />
-      <label class="inline mr-3 ml-1" :for="id + option">{{ option }}</label>
+      <label class="inline ml-1 mr-3" :for="id + option">{{ option }}</label>
     </template>
   </fieldset>
 </template>
 
-<script>
-export default {
-  props: {
-    id: String,
-    label: String,
-    options: Array,
-    required: Boolean,
-  },
-  data() {
-    return {
-      input: false,
-    }
-  },
-  // watch: {
-  //   input: function() {
-  //     this.$emit('input', input)
-  //   },
-  // },
-  computed: {
-    interface: {
-      get() {
-        return this.value
-      },
-      set(val) {
-        this.$emit('input', val)
-      },
-    },
-  },
+<script lang="ts">
+import { Component, Prop, Vue, VModel } from 'vue-property-decorator'
+
+@Component
+export default class FormRadio extends Vue {
+  @VModel({ type: String }) input!: string
+
+  @Prop() readonly id!: string
+  @Prop() readonly label!: string
+  @Prop() readonly options!: string[]
+  @Prop({ default: false }) readonly required!: boolean
 }
 </script>

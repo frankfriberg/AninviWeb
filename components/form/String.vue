@@ -1,43 +1,29 @@
 <template lang="html">
-  <div>
+  <fieldset>
     <label class="mb-3" v-if="label" :for="id">{{ label }}</label>
     <input
-      class="mt-2 h-full appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shaodw-outline"
+      class="w-full h-full px-3 py-2 mt-2 leading-tight border rounded appearance-none focus:outline-none focus:shaodw-outline"
       :type="type"
       :id="id"
       :required="required"
-      v-model="interface"
+      :placeholder="placeholder"
+      v-model="input"
     />
-  </div>
+  </fieldset>
 </template>
 
-<script>
-export default {
-  props: {
-    id: {
-      type: [String, Number],
-      required: true,
-    },
-    label: String,
-    input: {
-      type: String,
-      default: '',
-    },
-    type: {
-      type: String,
-      default: 'text',
-    },
-    required: Boolean,
-  },
-  computed: {
-    interface: {
-      get() {
-        return this.input
-      },
-      set(value) {
-        this.$emit('input', value)
-      },
-    },
-  },
+<script lang="ts">
+import { Component, Prop, Vue, ModelSync } from 'vue-property-decorator'
+
+@Component
+export default class FormString extends Vue {
+  @ModelSync('change', 'input') input!: string
+
+  @Prop() readonly id!: string
+  @Prop() readonly label!: string
+  @Prop() readonly placeholder!: string
+  @Prop({ default: 'text' }) readonly type!: string
+  @Prop() value?: string
+  @Prop({ default: false }) readonly required!: boolean
 }
 </script>

@@ -4,37 +4,38 @@
     <div class="radio" :id="id">
       <template v-for="(option, index) in options">
         <input
+          v-if="returnValue"
           type="checkbox"
           :name="id"
           :id="id + option"
           :value="option"
-          v-model="checked"
+          v-model="input"
         />
-        <label class="inline ml-1 mr-3" :for="id + option">{{
-          translated[index]
-        }}</label>
+        <input
+          v-else
+          type="checkbox"
+          :name="id"
+          :id="id + option"
+          :value="option"
+          v-model="input[index]"
+        />
+        <label class="inline ml-1 mr-3" :for="id + option">{{ option }}</label>
       </template>
     </div>
   </fieldset>
 </template>
 
-<script>
-export default {
-  props: {
-    id: String,
-    label: String,
-    options: Array,
-    translated: Array,
-  },
-  data() {
-    return {
-      checked: [],
-    }
-  },
-  watch: {
-    checked: function(val) {
-      this.$emit('input', val)
-    },
-  },
+<script lang="ts">
+import { Component, Prop, Vue, VModel } from 'vue-property-decorator'
+
+@Component
+export default class FormCheckbox extends Vue {
+  @VModel({ type: Array }) input!: string[]
+
+  @Prop({ default: false }) returnValue!: boolean
+  @Prop() readonly id!: string
+  @Prop() readonly label!: string
+  @Prop() readonly options!: string[]
+  @Prop({ default: false }) readonly required!: boolean
 }
 </script>

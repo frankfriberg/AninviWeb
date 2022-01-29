@@ -9,12 +9,19 @@
     "sourceMap": true,
     "strict": true,
     "noEmit": true,
+    "experimentalDecorators": true,
     "baseUrl": ".",
     "paths": {
       "~/*": ["./*"],
       "@/*": ["./*"]
     },
-    "types": ["@types/node", "@nuxt/types", "@types/nuxtjs__auth"]
+    "types": [
+      "@types/node",
+      "@nuxt/types",
+      "@types/nuxtjs__auth",
+      "@nuxtjs/i18n",
+      "@nuxtjs/auth-next"
+    ]
   },
   "exclude": ["node_modules"]
 }

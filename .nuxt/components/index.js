@@ -1,3 +1,4 @@
+export { default as NavBar } from '../../components/NavBar.vue'
 export { default as ResponseForm } from '../../components/ResponseForm.vue'
 export { default as FormBoolean } from '../../components/form/Boolean.vue'
 export { default as FormCheckbox } from '../../components/form/Checkbox.vue'

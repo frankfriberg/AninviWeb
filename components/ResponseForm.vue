@@ -1,12 +1,12 @@
 <template>
   <form class="px-8" @submit.prevent="handleSubmit">
     <h2>{{ $tc('form.names', input.persons.length) }}</h2>
-    <div v-for="(person, index) in input.persons" :key="index">
+    <div v-for="(person, index) in input.persons" :key="'person' + index">
       <FormString
         :required="true"
         :id="index"
         :input="person.name"
-        :key="index"
+        :key="'personString' + index"
         v-model="person.name"
         class="inline-block"
       />
@@ -49,14 +49,13 @@
           :label="
             $tc('form.allergy', input.persons.length, { name: person.name })
           "
-          :options="allergies"
-          :translated="allergiesTranslated"
+          :options="allergiesTranslated"
           :key="index + 'allergies'"
           v-model="person.allergy"
           :id="index + 'allergies'"
         />
         <FormString
-          v-if="person.allergy.includes('other')"
+          v-if="person.allergy[4]"
           v-model="person.allergy[5]"
           :label="$tc('form.other')"
           :key="index + 'otherAllergy'"
@@ -71,7 +70,7 @@
         :id="question._id"
         :options="question.options"
         :label="question.label[$i18n.locale]"
-        v-model="input.other[question._id]"
+        v-model="input.questions[question._id]"
       />
     </div>
 
@@ -89,77 +88,79 @@
   </form>
 </template>
 
-<script>
-export default {
-  props: {
-    questions: {
-      type: Array,
-      required: true,
-    },
-  },
-  data() {
-    return {
-      sent: false,
-      error: false,
-      allergies: ['lactose', 'nuts', 'fish', 'gluten', 'other'],
-      input: {
-        persons: [
-          {
-            name: '',
-            allergy: [],
-          },
-        ],
-        attending: '',
-        other: {},
-      },
-    }
-  },
-  mounted: function() {
-    if (this.$route.query.names !== undefined) {
-      let names = this.$route.query.names.split(' & ')
-      this.input.names = names
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator'
+import { QuestionTypes } from '~/../api/types/event.types'
+
+interface Questions {
+  type: QuestionTypes
+  label: {
+    [language: string]: string
+  }
+  options?: Array<String>
+}
+
+@Component
+export default class FormResponse extends Vue {
+  @Prop({ type: Array, required: true }) questions!: Questions
+  @Prop({ type: String, required: true }) eventId!: string
+
+  sent = false
+  error = false
+  input = {
+    persons: [{ name: '', allergy: [] }],
+    attending: false,
+    questions: {},
+  }
+
+  addPerson() {
+    this.input.persons.push({
+      name: '',
+      allergy: [],
+    })
+  }
+
+  removePerson(index: number) {
+    this.input.persons.splice(index, 1)
+  }
+
+  handleSubmit() {
+    this.sent = true
+    let formattedInput: Array<object> = []
+
+    for (const person of this.input.persons) {
+      formattedInput.push({
+        event: this.eventId,
+        name: person.name,
+        attending: this.input.attending,
+        allergies: person.allergy,
+        questions: this.input.questions,
+      })
     }
 
-    this.input.eventId = this.$store.getters['event']._id
-  },
-  methods: {
-    addPerson() {
-      this.input.persons.push({
-        name: '',
-        allergy: [],
-      })
-    },
-    removePerson(index) {
-      this.input.persons.splice(index, 1)
-    },
-    handleSubmit() {
-      // this.sent = true;
-      axios
-        .post('/api/v3/guest', {
-          input: this.input,
-        })
-        .then((response) => {
-          if (response.status === 201) {
-            this.$router.push(this.localePath('event-thanks'))
-          } else {
-            this.error = true
-          }
-        })
-        .catch((error) => {
+    this.$axios
+      .post('/guest', formattedInput)
+      .then((response) => {
+        if (response.status === 201) {
+          console.log(response)
+        } else {
           this.error = true
-          console.error(error.response)
-        })
-    },
-  },
-  computed: {
-    allergiesTranslated: function() {
-      let translated = []
-      this.allergies.forEach((allergy, index) => {
-        translated[index] = this.$t('form.allergies.' + allergy)
+        }
       })
-      return translated
-    },
-  },
+      .catch((error) => {
+        this.error = error
+        console.error(error.response)
+      })
+  }
+
+  get allergiesTranslated() {
+    let allergies = ['lactose', 'nuts', 'fish', 'gluten', 'other']
+    let translated: Array<string> = []
+    allergies.forEach((allergy, index) => {
+      translated[index] = this.$t('form.allergies.' + allergy).toString()
+    })
+    return translated
+  }
 }
 </script>
 

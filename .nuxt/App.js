@@ -6,13 +6,13 @@ import NuxtError from '../layouts/error.vue'
 import NuxtLoading from './components/nuxt-loading.vue'
 import NuxtBuildIndicator from './components/nuxt-build-indicator'
 
-import '../node_modules/@nuxtjs/tailwindcss/dist/runtime/tailwind.css'
+import '../assets/css/main.css'
 
-import _6da22f41 from '../layouts/client.vue'
 import _78016a7f from '../layouts/invite.vue'
+import _2d2a8cc1 from '../layouts/user.vue'
 import _6f6c098b from './layouts/default.vue'
 
-const layouts = { "_client": sanitizeComponent(_6da22f41),"_invite": sanitizeComponent(_78016a7f),"_default": sanitizeComponent(_6f6c098b) }
+const layouts = { "_invite": sanitizeComponent(_78016a7f),"_user": sanitizeComponent(_2d2a8cc1),"_default": sanitizeComponent(_6f6c098b) }
 
 export default {
   render (h, props) {

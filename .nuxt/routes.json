@@ -3,28 +3,42 @@
     "name": "login",
     "path": "/login",
     "component": "/Users/frank/Sync/Development/Aninvi/v3/www/pages/login.vue",
-    "chunkName": "pages/login",
-    "_name": "_6833382b"
+    "chunkName": "pages/login"
   },
   {
     "name": "user",
     "path": "/user",
     "component": "/Users/frank/Sync/Development/Aninvi/v3/www/pages/user/index.vue",
-    "chunkName": "pages/user/index",
-    "_name": "_7bff0e88"
+    "chunkName": "pages/user/index"
+  },
+  {
+    "name": "user-new",
+    "path": "/user/new",
+    "component": "/Users/frank/Sync/Development/Aninvi/v3/www/pages/user/new.vue",
+    "chunkName": "pages/user/new"
   },
   {
     "name": "i-event",
     "path": "/i/:event",
     "component": "/Users/frank/Sync/Development/Aninvi/v3/www/pages/i/_event/index.vue",
-    "chunkName": "pages/i/_event/index",
-    "_name": "_110a2472"
+    "chunkName": "pages/i/_event/index"
+  },
+  {
+    "name": "user-event",
+    "path": "/user/:event",
+    "component": "/Users/frank/Sync/Development/Aninvi/v3/www/pages/user/_event/index.vue",
+    "chunkName": "pages/user/_event/index"
+  },
+  {
+    "name": "user-event-settings",
+    "path": "/user/:event/settings",
+    "component": "/Users/frank/Sync/Development/Aninvi/v3/www/pages/user/_event/settings.vue",
+    "chunkName": "pages/user/_event/settings"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Users/frank/Sync/Development/Aninvi/v3/www/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_c2e8d5d8"
+    "chunkName": "pages/index"
   }
 ]

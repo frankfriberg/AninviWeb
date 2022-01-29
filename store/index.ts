@@ -1,23 +1,25 @@
-import type { Context } from '@nuxt/types'
-import { NuxtAxiosInstance } from '@nuxtjs/axios'
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
-import { Event } from '../../api/models'
+import { Event } from '~/../api/types/event.types'
+import { Guest } from '~/../api/types/guest.types'
 
 export interface RootState {
   event: Event
+  guests: Guest[]
 }
 
 export const state = () => ({
-  event: null
+  event: null,
+  guests: [],
 })
 
 export const getters: GetterTree<RootState, RootState> = {
   event: (state) => state.event,
-  questions: (state) => state.event.questions,
+  guests: (state) => state.guests,
 }
 
 export const mutations: MutationTree<RootState> = {
   SET_EVENT: (state, event: Event) => (state.event = event),
+  SET_GUESTS: (state, guests: Guest[]) => (state.guests = guests),
 }
 
 export const actions: ActionTree<RootState, RootState> = {
@@ -25,9 +27,55 @@ export const actions: ActionTree<RootState, RootState> = {
     return this.$axios
       .get(`event/${slug}`)
       .then((response) => {
-        console.log(response.data)
         return commit('SET_EVENT', response.data)
       })
-      .catch((err) => { throw new Error(err)})
+      .catch((err) => {
+        throw new Error(err)
+      })
   },
+  getGuestsByEventId({ commit }, { eventId, token }) {
+    return this.$axios
+      .get(`/guest/${eventId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(({ data }) => {
+        commit('SET_GUESTS', data)
+        return data
+      })
+      .catch((err) => {
+        throw new Error(err)
+      })
+  },
+  updateGuest({ commit }, { guest, token }) {
+    return this.$axios
+      .put(`/guest/${guest._id}`, guest, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(({ data }) => {
+        commit('SET_GUESTS', data)
+        return data
+      })
+      .catch((err) => {
+        throw new Error(err)
+      })
+  },
+  deleteGuest({ commit }, { guestId, token }) {
+    return this.$axios
+      .delete(`/guest/${guestId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(({ data }) => {
+        commit('SET_GUESTS', data)
+        return data
+      })
+      .catch((err) => {
+        throw new Error(err)
+      })
+  }
 }

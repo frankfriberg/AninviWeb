@@ -1,4 +1,5 @@
 export default {
+  flag: '🇳🇴',
   info: 'Mer Info',
   respond: 'Svar Her',
   send: 'Send Svar',
@@ -15,8 +16,8 @@ export default {
       nuts: 'Nøtter',
       fish: 'Fisk',
       gluten: 'Gluten',
-      other: 'Annet'
+      other: 'Annet',
     },
     error: 'En feil har skjedd, prøv igjen senere',
-  }
+  },
 }

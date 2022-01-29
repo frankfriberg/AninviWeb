@@ -1,16 +1,14 @@
 <template>
-  <ResponseForm :questions="this.$store.getters['questions']" />
+  <ResponseForm :questions="this.event.questions" :eventId="this.event._id" />
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { Component, Vue } from 'vue-property-decorator'
 
-export default Vue.extend({
+@Component({
   layout: 'invite',
-  data() {
-    return {
-      event: this.$store.getters['w'],
-    }
-  },
 })
+export default class InviteIndex extends Vue {
+  event: object = this.$store.getters['event']
+}
 </script>

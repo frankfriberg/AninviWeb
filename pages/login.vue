@@ -24,33 +24,28 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-export default Vue.extend({
-  data() {
-    return {
-      form: {
-        email: 'admin@test.com',
-        password: 'admin',
-      },
-      error: '',
-    }
-  },
-  methods: {
-    async login() {
-      this.$auth
-        .loginWith('local', {
-          data: this.form,
-        })
-        .then((response) => {
-          this.$auth.setUser(response)
-        })
-        .catch((error) => {
-          console.error(error)
-          this.error = error
-        })
-    },
-  },
-})
+import { Component, Vue } from 'vue-property-decorator'
+
+@Component
+export default class Login extends Vue {
+  form = {
+    email: 'test@test.com',
+    password: 'test',
+  }
+
+  error = ''
+
+  login() {
+    this.$auth
+      .loginWith('local', {
+        data: this.form,
+      })
+      .catch((error) => {
+        console.error(error)
+        this.error = error
+      })
+  }
+}
 </script>
 
 <style></style>

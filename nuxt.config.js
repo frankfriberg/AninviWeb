@@ -1,3 +1,5 @@
+import { join } from 'path'
+
 export default {
   target: 'server',
   head: {
@@ -15,10 +17,18 @@ export default {
   },
   plugins: [],
   components: true,
-  buildModules: ['@nuxtjs/tailwindcss', '@nuxt/typescript-build'],
+  css: ['@/assets/css/main.css'],
+  buildModules: ['@nuxt/postcss8', '@nuxt/typescript-build'],
   modules: ['@nuxtjs/axios', '@nuxtjs/i18n', '@nuxtjs/auth-next'],
   serverMiddleware: {},
-  build: {},
+  build: {
+    postcss: {
+      plugins: {
+        tailwindcss: {},
+        autoprefixer: {},
+      },
+    },
+  },
   i18n: {
     locales: [
       {
@@ -36,23 +46,36 @@ export default {
     defaultLocale: 'no',
   },
   auth: {
+    redirect: {
+      login: '/login',
+      logout: '/',
+      callback: '/login',
+      home: '/user',
+    },
     strategies: {
       local: {
         token: {
           property: 'token',
           maxAge: 3600,
+          global: true,
         },
         user: {
           property: false,
-          autoFetch: false,
         },
         endpoints: {
+          logout: {
+            url: 'auth/logout',
+            method: 'post',
+          },
           login: {
             url: 'auth/login',
             method: 'post',
             propertyName: 'data.token',
           },
-          logout: false,
+          user: {
+            url: 'auth/user',
+            method: 'get',
+          },
         },
       },
     },

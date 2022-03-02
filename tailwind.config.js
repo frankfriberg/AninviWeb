@@ -7,7 +7,11 @@ module.exports = {
     './nuxt.config.{js,ts}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'playfair-display': ['Playfair Display', 'serif'],
+      },
+    },
   },
   plugins: [],
 }
